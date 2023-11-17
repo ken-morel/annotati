@@ -1,22 +1,24 @@
-name: "compile sphinx"
-on: 
-- pull_request
+name: "Sphinx: Render docs"
+
+on: push
 
 jobs:
-  docs:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v1
-    - uses: ammaraskar/sphinx-action@master
+    - uses: actions/checkout@v4
+    - name: Build HTML
+      uses: ammaraskar/sphinx-action@master
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
       with:
-        docs-folder: "docs-source/"
-    - uses: actions/upload-artifact@v1
+        name: html-docs
+        path: docs-source/build/html/
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
       with:
-        name: DocumentationHTML
-        path: docs-source/_build/html/
-    - uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "docs-source/"
-        build-command: "sphinx-build -b html . _build"
-    - name: "copy files"
-      run: "copy docs-source/build/html docs/"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs-source/build/html
