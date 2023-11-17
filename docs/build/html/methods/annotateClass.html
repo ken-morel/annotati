@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>annotatiClass() &#8212; annotati 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=514cf933" />
+    
+    <script src="../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="overload()" href="overload.html" />
+    <link rel="prev" title="annotati()" href="annotati.html" />
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="overload.html" title="overload()"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="annotati.html" title="annotati()"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">annotati 1.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">annotatiClass()</a></li>
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="annotaticlass">
+<h1>annotatiClass()<a class="headerlink" href="#annotaticlass" title="Link to this heading">¶</a></h1>
+<p>It calls the <em>annotati.annotati()</em> on the function methods,
+specifying <em>method</em> keyword argument to True</p>
+<p>It subclassesthe class
+And adds typechecking code into the __setattr__</p>
+<p>It has a boolean argument methods which sets if methods are annotatid,
+default True</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">annotati</span> <span class="kn">import</span> <span class="n">annotatiClass</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@annotatiClass</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">Car</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">year</span><span class="p">:</span><span class="nb">int</span>
+<span class="gp">... </span>    <span class="n">brand</span><span class="p">:</span><span class="nb">str</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">:</span><span class="nb">int</span><span class="o">|</span><span class="nb">str</span><span class="p">,</span> <span class="n">brand</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">setbrand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="mi">2022</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">car1</span><span class="o">.</span><span class="n">year</span>
+<span class="go">2022</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">&quot;2022&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;C:\pymodules\annotati\__init__.py&quot;</span>, line <span class="m">92</span>, in <span class="n">_func</span>
+<span class="w">    </span><span class="n">ret</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">iargs</span><span class="p">,</span> <span class="o">**</span><span class="n">ikw</span><span class="p">)</span>
+<span class="w">          </span><span class="pm">^^^^^^^^^^^^^^^^^^^</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">6</span>, in <span class="n">__init__</span>
+  File <span class="nb">&quot;C:\pymodules\annotati\__init__.py&quot;</span>, line <span class="m">210</span>, in <span class="n">__setattr__</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">AnnotationError</span><span class="p">(</span>
+<span class="gr">annotati.AnnotationError</span>: <span class="n">argument 2022 for attribute year does not match annotation &lt;class &#39;int&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="mi">1994</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">car1</span><span class="o">.</span><span class="n">setbrand</span><span class="p">(</span><span class="s2">&quot;hololili&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">car1</span><span class="o">.</span><span class="n">brand</span>
+</pre></div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="annotati.html"
+                          title="previous chapter">annotati()</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="overload.html"
+                          title="next chapter">overload()</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/methods/annotatiClass.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="overload.html" title="overload()"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="annotati.html" title="annotati()"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">annotati 1.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">annotatiClass()</a></li>
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, ken-morel.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

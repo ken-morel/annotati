@@ -1,0 +1,40 @@
+==================================================
+annotati_class()
+==================================================
+
+It calls the *annotati.annotati()* on the function methods,
+specifying *method* keyword argument to True
+
+It subclassesthe class
+And adds typechecking code into the __setattr__
+
+It has a boolean argument methods which sets if methods are annotatid,
+default True
+
+>>> from annotati import annotati_class
+>>>
+>>> @annotati_class()
+... class Car:
+...     year:int
+...     brand:str
+...     def __init__(self, year:int|str, brand:str=None):
+...             self.year = year
+...     def setbrand(self, brand:str) -> str:
+...         self.brand = brand
+...
+>>> car1 = Car(2022)
+>>> car1.year
+2022
+>>> car1 = Car("2022")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\pymodules\annotati\__init__.py", line 92, in _func
+    ret = func(*iargs, **ikw)
+          ^^^^^^^^^^^^^^^^^^^
+  File "<stdin>", line 6, in __init__
+  File "C:\pymodules\annotati\__init__.py", line 210, in __setattr__
+    raise AnnotationError(
+annotati.AnnotationError: argument 2022 for attribute year does not match annotation <class 'int'>
+>>> car1 = Car(1994)
+>>> car1.setbrand("hololili")
+>>> car1.brand

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>annotati() &#8212; annotati 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=514cf933" />
+    
+    <script src="../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="annotati_class()" href="annotati_class.html" />
+    <link rel="prev" title="annotati-types" href="../annotati-types.html" />
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="annotati_class.html" title="annotati_class()"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../annotati-types.html" title="annotati-types"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">annotati 1.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">annotati()</a></li>
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="annotati">
+<h1>annotati()<a class="headerlink" href="#annotati" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>It permits you annotati <em>specific</em> types to a parameter</p>
+<p>it raises an <em>AnnotationError</em> when type mismatch</p>
+<p>annotati.annotati returns a decorator which modifies the function
+for it to typecheck on each call</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">annotati</span> <span class="k">as</span> <span class="nn">ann</span>
+<span class="nd">@ann</span><span class="o">.</span><span class="n">annotati</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+</div>
+<section id="annotating-a-function">
+<h2>Annotating a function<a class="headerlink" href="#annotating-a-function" title="Link to this heading">¶</a></h2>
+<p>To do so we use the annotati.annotati()() decorator, or as a method</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">annotati</span>
+
+<span class="hll"><span class="nd">@annotati</span><span class="o">.</span><span class="n">annotati</span><span class="p">()</span>
+</span><span class="k">def</span> <span class="nf">addInt</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>annotati.annotati may take a boolean <strong>_raise</strong> argument
+specifying if an error should be raised on mismatch</p>
+</section>
+<section id="annotating-a-class">
+<h2>Annotating a class<a class="headerlink" href="#annotating-a-class" title="Link to this heading">¶</a></h2>
+<p>When <em>annotati.annotati()()</em> decorates a class,
+it will call <a class="reference external" href="annotati_class.html">annotati.annotati_class()</a>
+with default arguments</p>
+<blockquote>
+<div><p>It tries to call annotati on all the class methods,
+specifying method keyword argument to be true
+And inserts some type checking code in __setattr__()</p>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="annotati_class.html">annotati.annotati_class()</a></p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">annotati()</a><ul>
+<li><a class="reference internal" href="#annotating-a-function">Annotating a function</a></li>
+<li><a class="reference internal" href="#annotating-a-class">Annotating a class</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../annotati-types.html"
+                          title="previous chapter">annotati-types</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="annotati_class.html"
+                          title="next chapter">annotati_class()</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/methods/annotati.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="annotati_class.html" title="annotati_class()"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../annotati-types.html" title="annotati-types"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">annotati 1.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">annotati()</a></li>
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, ken-morel.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
