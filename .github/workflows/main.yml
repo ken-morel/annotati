@@ -1,0 +1,22 @@
+name: "compile sphinx"
+on: 
+- pull_request
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ammaraskar/sphinx-action@master
+      with:
+        docs-folder: "docs-source/"
+    - uses: actions/upload-artifact@v1
+      with:
+        name: DocumentationHTML
+        path: docs-source/_build/html/
+    - uses: ammaraskar/sphinx-action@master
+      with:
+        docs-folder: "docs-source/"
+        build-command: "sphinx-build -b html . _build"
+    - name: "copy files"
+      run: "copy docs-source/build/html docs/"
